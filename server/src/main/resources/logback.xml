@@ -1,0 +1,37 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss:sss}){green} %clr([%thread]){magenta} %clr(%5p) %clr(%logger{36}){cyan}%clr(.%method\(\)){yellow}.%clr(%line){blue} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/musinsa/logs/app.log</file>
+        <encoder>
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss:sss}){green} %clr([%thread]){magenta} %clr(%5p) %clr(%logger{36}){cyan}%clr(.%method\(\)){yellow}.%clr(%line){blue} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/logs/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <logger name="com.musinsa.server" level="info" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <springProfile name="production">
+            <appender-ref ref="FILE" />
+        </springProfile>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <springProfile name="production">
+            <appender-ref ref="FILE" />
+        </springProfile>
+    </root>
+</configuration>
