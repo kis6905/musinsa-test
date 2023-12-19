@@ -13,6 +13,6 @@ class ProductApiFacade(
         // val categories: List<CategoryDto> = ...
 
         // category 별 최저가 상품 가격 + 브랜드 이름
-        productService.findLowestPriceProductByCategory()
+//        productService.findLowestPriceProductByCategory()
     }
 }
