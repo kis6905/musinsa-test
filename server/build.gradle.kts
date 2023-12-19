@@ -7,6 +7,12 @@ plugins {
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
 }
 
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
+}
+
 group = "com.musinsa"
 version = "1.0-SNAPSHOT"
 
