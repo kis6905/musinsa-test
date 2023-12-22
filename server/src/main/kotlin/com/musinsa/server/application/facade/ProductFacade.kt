@@ -1,6 +1,6 @@
 package com.musinsa.server.application.facade
 
-import com.musinsa.server.application.common.exception.BizException
+import com.musinsa.server.common.exception.BizException
 import com.musinsa.server.application.common.response.ResponseCode
 import com.musinsa.server.application.facade.dto.BrandProductsByCategoryDto
 import com.musinsa.server.application.facade.dto.HighestLowestCategoryProduct
@@ -43,6 +43,9 @@ class ProductFacade(
     fun findProductsOfLowestPriceBrand(): LowestPriceDto {
         // 모든 브랜드 조회
         val brandList = brandService.findAllBrands()
+        if (brandList.isEmpty()) {
+            throw BizException(ResponseCode.NOT_FOUND_BRAND)
+        }
 
         // 상품 합계가 가장 낮은 브랜드 추출
         val lowestPriceBrand: BrandProductsByCategoryDto = brandList
@@ -64,7 +67,7 @@ class ProductFacade(
     }
 
     fun findHighestAndLowestPriceProductsByCategory(categoryId: Long): HighestLowestCategoryProduct {
-        val category: CategoryDto = categoryService.findById(categoryId) ?: throw BizException(ResponseCode.NOT_FOUND_BRAND)
+        val category: CategoryDto = categoryService.findById(categoryId) ?: throw BizException(ResponseCode.NOT_FOUND_CATEGORY)
         val lowestPriceProduct = productService.findLowestPriceProductByCategory(categoryId)
         val highestPriceProduct = productService.findHighestPriceProductByCategory(categoryId)
 

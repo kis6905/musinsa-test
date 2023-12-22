@@ -1,4 +1,4 @@
-package com.musinsa.server.application.common.exception
+package com.musinsa.server.common.exception
 
 import com.musinsa.server.application.common.response.ResponseCode
 

@@ -1,6 +1,6 @@
 package com.musinsa.server.domain.brand
 
-import com.musinsa.server.application.common.helper.logger
+import com.musinsa.server.common.helper.logger
 import com.musinsa.server.domain.brand.dto.BrandDto
 import com.musinsa.server.infra.database.brand.repository.BrandRepository
 import org.springframework.cache.annotation.CacheEvict

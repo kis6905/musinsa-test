@@ -1,6 +1,6 @@
 package com.musinsa.server.domain.category
 
-import com.musinsa.server.application.common.helper.logger
+import com.musinsa.server.common.helper.logger
 import com.musinsa.server.domain.category.dto.CategoryDto
 import com.musinsa.server.infra.database.category.repository.CategoryRepository
 import org.springframework.cache.annotation.CacheEvict

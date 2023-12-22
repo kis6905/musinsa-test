@@ -5,10 +5,10 @@ import com.musinsa.server.infra.database.product.entity.Product
 data class ProductDto(
     val productId: Long,
     val price: Long,
-    val brandId: Long?,
-    val brandName: String?,
-    val categoryId: Long?,
-    val categoryName: String?
+    val brandId: Long? = null,
+    val brandName: String? = null,
+    val categoryId: Long? = null,
+    val categoryName: String? = null,
 ) {
     companion object {
         fun of(product: Product): ProductDto {

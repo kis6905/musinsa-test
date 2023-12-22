@@ -1,6 +1,6 @@
 package com.musinsa.server.domain.product
 
-import com.musinsa.server.application.common.helper.logger
+import com.musinsa.server.common.helper.logger
 import com.musinsa.server.domain.product.dto.ProductDto
 import com.musinsa.server.infra.database.product.entity.Product
 import com.musinsa.server.infra.database.product.repository.ProductRepository

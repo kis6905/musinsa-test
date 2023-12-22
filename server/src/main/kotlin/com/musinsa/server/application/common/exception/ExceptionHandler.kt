@@ -1,8 +1,9 @@
 package com.musinsa.server.application.common.exception
 
-import com.musinsa.server.application.common.helper.logger
+import com.musinsa.server.common.helper.logger
 import com.musinsa.server.application.common.response.Response
 import com.musinsa.server.application.common.response.ResponseCode
+import com.musinsa.server.common.exception.BizException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
