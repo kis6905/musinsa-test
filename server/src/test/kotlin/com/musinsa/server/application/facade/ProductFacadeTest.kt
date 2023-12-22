@@ -46,7 +46,7 @@ class ProductFacadeTest: BehaviorSpec({
             property(ProductDto::price) { 2000L }
         }
 
-        When("when") {
+        When("정상") {
             every { categoryService.findAllCategories() } answers { categoryList }
             every { productService.findLowestPriceProductByCategory(1L) } answers { product1 }
             every { productService.findLowestPriceProductByCategory(2L) } answers { product2 }
