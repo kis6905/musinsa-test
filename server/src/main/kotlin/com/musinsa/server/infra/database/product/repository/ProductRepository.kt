@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ProductRepository: JpaRepository<Product, Long> {
+    fun findTopByCategoryCategoryIdOrderByPriceAscCategoryCategoryNameAsc(categoryId: Long): Product?
+    fun findTopByCategoryCategoryIdOrderByPriceDescCategoryCategoryNameAsc(categoryId: Long): Product?
+    fun findAllByBrandBrandId(brandId: Long): List<Product>
 }

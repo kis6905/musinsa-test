@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface BrandRepository: JpaRepository<Brand, Long> {
+    fun findAllByDeletedFalse(): List<Brand>
 }
