@@ -30,5 +30,6 @@ abstract class AuditingEntity(
 ) {
     companion object {
         const val SYSTEM: String = "SYSTEM"
+        const val ADMIN: String = "ADMIN"
     }
 }

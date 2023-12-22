@@ -11,7 +11,9 @@ import com.musinsa.server.domain.category.CategoryService
 import com.musinsa.server.domain.category.dto.CategoryDto
 import com.musinsa.server.domain.product.ProductService
 import com.musinsa.server.domain.product.dto.ProductDto
+import com.musinsa.server.infra.database.common.entity.AuditingEntity
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductFacade(
@@ -59,6 +61,7 @@ class ProductFacade(
                     totalPrice = sumPrice,
                 )
             }
+            .filterNot { it.productsByCategory.isEmpty() }
             .minBy { it.totalPrice }
 
         return LowestPriceDto(
@@ -77,6 +80,36 @@ class ProductFacade(
             lowestPriceProduct = lowestPriceProduct,
             highestPriceProduct = highestPriceProduct,
         )
+    }
+
+    fun findAllProducts(): List<ProductDto> {
+        return productService.findAllProducts()
+    }
+
+    @Transactional(readOnly = false)
+    fun saveProduct(productDto: ProductDto): ProductDto {
+        val saved = productService.saveProduct(productDto, AuditingEntity.ADMIN)
+        evictCache(saved)
+        return saved
+    }
+
+    fun modifyProduct(productDto: ProductDto): ProductDto {
+        val saved = productService.modifyProduct(productDto, AuditingEntity.ADMIN)
+        evictCache(saved)
+        return saved
+    }
+
+    @Transactional(readOnly = false)
+    fun removeProduct(productId: Long) {
+        val productDto = productService.findById(productId) ?: throw BizException(ResponseCode.NOT_FOUND_PRODUCT)
+        productService.removeProduct(productId, AuditingEntity.ADMIN)
+        evictCache(productDto)
+    }
+
+    private fun evictCache(productDto: ProductDto) {
+        productService.evictProductListByBrand(productDto.brandId!!)
+        productService.evictLowestPriceProductByCategory(productDto.categoryId!!)
+        productService.evictHighestPriceProductByCategory(productDto.categoryId)
     }
 
 }

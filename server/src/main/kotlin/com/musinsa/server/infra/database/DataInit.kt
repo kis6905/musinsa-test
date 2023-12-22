@@ -33,7 +33,6 @@ class DataInit(
     }
 
     @PostConstruct
-    @Transactional(readOnly = false)
     fun init() {
         val brandList = listOf(
             Brand(brandName = "A", _createdBy = AuditingEntity.SYSTEM, _modifiedBy = AuditingEntity.SYSTEM),
@@ -76,6 +75,7 @@ class DataInit(
                 }
             }
         productRepository.saveAll(productList)
+        productRepository.flush()
     }
 
 }

@@ -15,10 +15,10 @@ data class ProductDto(
             return ProductDto(
                 productId = product.productId!!,
                 price = product.price,
-                brandId = product.brand.brandId,
-                brandName = product.brand.brandName,
-                categoryId = product.category.categoryId,
-                categoryName = product.category.categoryName,
+                brandId = product.brand?.brandId,
+                brandName = product.brand?.brandName,
+                categoryId = product.category?.categoryId,
+                categoryName = product.category?.categoryName,
             )
         }
     }
